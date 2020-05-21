@@ -53,7 +53,6 @@
         }
       }
     </script>
-
   </head>
 
   <body onload='loadCategories()'>
