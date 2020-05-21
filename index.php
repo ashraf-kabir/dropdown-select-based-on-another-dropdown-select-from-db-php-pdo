@@ -27,10 +27,11 @@ $jsonCats = json_encode($categories);
 $jsonSubCats = json_encode($subcats);
 ?>
 
-<!docytpe html>
-<html>
-
+<!DOCTYPE html>
+<html lang="en">
   <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script type='text/javascript'>
       <?php
         echo "var categories = $jsonCats; \n";
