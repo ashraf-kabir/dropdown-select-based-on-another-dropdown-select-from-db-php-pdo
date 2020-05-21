@@ -2,8 +2,6 @@
   // $db = new mysqli('localhost','root','','magnito_dashboard');//set your database handler
   include 'config.php';
 
-
-
   $sql1 = "SELECT id,dept_name FROM departments";
   $query1 = $dbh->prepare($sql1);
   $query1->execute();
@@ -72,10 +70,31 @@
   </head>
 
   <body onload='loadCategories()'>
-    <select id='categoriesSelect'>
+  
+  <form method="post">
+    <select name="cat" id='categoriesSelect'>
     </select>
 
-    <select id='subcatsSelect'>
+    <select name="subcat" id='subcatsSelect'>
     </select>
+    <button type="submit" name="submit">Submit</button>
+  </form>
+  <?php
+  if (isset($_POST['submit'])) {
+    $cat = $_POST['cat'];
+    $subcat = $_POST['subcat'];
+    $sql3 = "INSERT INTO `testcatsubcat`(`cat`,`subcat`) VALUES(:cat,:subcat)";
+    $query3 = $dbh->prepare($sql3);
+    $query3->bindParam(':cat', $cat, PDO::PARAM_STR);
+    $query3->bindParam(':subcat', $subcat, PDO::PARAM_STR);
+    $query3->execute();
+    $lastInsertId = $dbh->lastInsertId();
+    if ($lastInsertId) {
+      echo "<script>alert('Info ADDED successfully');document.location = 'index.php';</script>";
+    } else {
+      echo "<script>alert('Something went wrong');</script>";
+    }
+  }
+  ?>
   </body>
 </html>
